@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Hangman by malacandrian</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Hangman</h1>
+        <p>Solving Hangman</p>
+
+        <p class="view"><a href="https://github.com/malacandrian/Hangman">View the Project on GitHub <small>malacandrian/Hangman</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/malacandrian/Hangman/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/malacandrian/Hangman/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/malacandrian/Hangman">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="what-is-the-best-word-to-choose-when-playing-hangman" class="anchor" href="#what-is-the-best-word-to-choose-when-playing-hangman"><span class="octicon octicon-link"></span></a>What is the best word to choose when playing hangman?</h1>
+
+<p>This is the question we're trying to answer, but first we need to ask some better ones.</p>
+
+<ul>
+<li>How do we define a "Good word"?</li>
+<li> What makes one word better than another?</li>
+</ul><h2>
+<a name="the-game" class="anchor" href="#the-game"><span class="octicon octicon-link"></span></a>The Game</h2>
+
+<p>Before we begin answering these questions we need to establish what the game is, and how it is best played</p>
+
+<h3>
+<a name="the-rules" class="anchor" href="#the-rules"><span class="octicon octicon-link"></span></a>The Rules</h3>
+
+<ol>
+<li>The game chooses a secret word  and tells the player its length</li>
+<li>Each turn the player can either
+
+<ul>
+<li>Ask the game if the word contains a character
+
+<ul>
+<li>If it does, the player is told which position(s) the character lies in</li>
+<li>If it does not, the player loses 1 life.</li>
+<li>If the player loses 10 lives, they lose</li>
+</ul>
+</li>
+<li>Guess what the word is
+
+<ul>
+<li>If the player is correct, they win </li>
+<li>If the player is incorrect, they lose
+###Strategy
+Because penalties are only incurred for incorrect guesses, the optimal strategy is not to eliminate as large a portion of potential words as possible, but rather to make as few incorrect guesses as possible. This can be achieved by always selecting the character that appears in the most words that are still possible in a given game state.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol><p>e.g. Given the game state "a _ _ u _ e" Incorrect letters: c, d</p>
+
+<p>The possible remaining words are : abjure, allure, ampule, arouse, assume, assure, astute, attune</p>
+
+<p>The unguessed characters appear with the following frequencies b-1, j-1, l-2, m-2, n-1, o-1, p-1, r-3, s-4, t-2</p>
+
+<p>Therefore, our next best guess is 's'. When this gives us the pattern "as _ u _ e" this only leaves "astute", therefore the word is solved.</p>
+
+<h2>
+<a name="how-do-we-define-a-good-word" class="anchor" href="#how-do-we-define-a-good-word"><span class="octicon octicon-link"></span></a>How do we define a "Good Word"?</h2>
+
+<p>A good word is a word that is hard to guess. A hard to guess word takes a large number of attempts before the word is </p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/malacandrian">malacandrian</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
