@@ -95,12 +95,23 @@ Because penalties are only incurred for incorrect guesses, the optimal strategy 
 <li>Number of incorrect guesses required</li>
 <li>How many possibilities there are after 9 incorrect characters</li>
 </ul><h2>
+<a name="what-makes-one-word-better-than-another" class="anchor" href="#what-makes-one-word-better-than-another"><span class="octicon octicon-link"></span></a>What makes one word better than another?</h2>
+
+<p>It is prudent to wait</p>
+
+<h2>
 <a name="collecting-the-data" class="anchor" href="#collecting-the-data"><span class="octicon octicon-link"></span></a>Collecting the data</h2>
 
 <p>A program was written to test <a href="http://www.mieliestronk.com/corncob_lowercase.txt">a list of over 58000 words</a> on both the easy and optimal strategies, outputting its results as a CSV, Excel was then used to analyse the results.</p>
 
 <h3>
 <a name="the-program" class="anchor" href="#the-program"><span class="octicon octicon-link"></span></a>The Program</h3>
+
+<p>At each step the program generates a Regex pattern to represent the current information about the word (in the example above it would have generated <code>^a[^acdeu][^acdeu]u[^acdeu]e\r</code>). It then checks this against all remaining words to find the current set of possible words. If there is ever only one word in this set the problem has been solved. The process is performed twice, once using the easy strategy then again using the optimal one.</p>
+
+<p>The program was written in C# across two main classes: <code>Word.cs</code> allows the words to be queried as to their contents, remembers what has been guessed, and creates the Regex patterns. <code>WordTester.cs</code> maintains the list of possible words and chooses the next character to guess at each step, as well as reporting when the word has been solved.</p>
+
+<p><em>The source code is available, though if you want to run it yourself it should be noted that it performs an O(n^2) operation on the dictionary, so takes a while. About 4 hours/run on my laptop.</em></p>
       </section>
     </div>
 
