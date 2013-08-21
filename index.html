@@ -110,7 +110,7 @@
 <h2>
 <a name="collecting-the-data" class="anchor" href="#collecting-the-data"><span class="octicon octicon-link"></span></a>Collecting the data</h2>
 
-<p>A program was written to test <a href="http://www.mieliestronk.com/corncob_lowercase.txt">a list of over 58000 words</a> on both the easy and optimal strategies, outputting its results as a CSV, Excel and PowerPivot were then used to analyse the results.</p>
+<p>A program was written to test <a href="http://www.mieliestronk.com/corncob_lowercase.txt">a list of over 58000 words</a> (henceforth reffered to as "the dictionary") on both the easy and optimal strategies, outputting its results as a CSV, Excel and PowerPivot were then used to analyse the results.</p>
 
 <h3>
 <a name="the-program" class="anchor" href="#the-program"><span class="octicon octicon-link"></span></a>The Program</h3>
@@ -120,6 +120,39 @@
 <p>The program was written in C# across two main classes: <code>Word.cs</code> allows the words to be queried as to their contents, remembers what has been guessed, and creates the Regex patterns. <code>WordTester.cs</code> maintains the list of possible words and chooses the next character to guess at each step, as well as reporting when the word has been solved.</p>
 
 <p><em>The source code is available, though if you want to run it yourself it should be noted that it performs an O(n^2) operation on the dictionary, so takes a while. About 4 hours/run on my laptop.</em></p>
+
+<h2>
+<a name="the-results" class="anchor" href="#the-results"><span class="octicon octicon-link"></span></a>The results</h2>
+
+<h3>
+<a name="what-makes-a-word-bad" class="anchor" href="#what-makes-a-word-bad"><span class="octicon octicon-link"></span></a>What makes a word bad?</h3>
+
+<p>Before we start answering this question it's worth looking at factors we thought would help but either have no affect, or actually make the word easier to guess.</p>
+
+<h4>
+<a name="length" class="anchor" href="#length"><span class="octicon octicon-link"></span></a>Length</h4>
+
+<p>One of the most surprising results is that long words are easier to guess than shorter ones. Despite being longer, they require fewer guesses to discern the word, and incur many fewer mistakes.</p>
+
+<p>!!!GRAPH 1 - Word difficulty against length!!!</p>
+
+<p>As the word length increases the number of possible arrangements increases much faster than the number of words increases (see the below graphs). This means that for any given pattern there are fewer words that match it as word length increases.</p>
+
+<p>!!!Graph: Word lengths
+!!!Graph: Word space use</p>
+
+<p>e.g. "Onomatopoeia" is a 12 letter word with 8 unique characters. There are 3102 possible 12 letter words in the dictionary (about 5%), with "i" the most common character among them. Plugging this in gives the pattern <code>"_ _ _ _ _ _ _ _ _ _ i _"</code>, which only 67 words match. We're now down to 2% of 12 letter words, or 0.1% of the dictionary in 1 guess. The next guess is "o" giving us a pattern of <code>"o _ o _ _ _ o _ o _ i _"</code> which is only matched by "onomatopoeia".</p>
+
+<p>Playing against the easy strategy, the word contains the 6 most common characters, and after 3 (e, t, a) produces the pattern <code>"_ _ _ _ at _ _ _ e _ a"</code> which again can only be matched by "onomatopoeia".</p>
+
+<h3>
+<a name="unique-characters" class="anchor" href="#unique-characters"><span class="octicon octicon-link"></span></a>Unique Characters</h3>
+
+<p>Furthermore, having a high proportion of unique characters appears to have no discernible effect on word guess-ability, while high number of them makes the words easier to guess</p>
+
+<p>!!!GRAPH - Word diffuclty against unique chars!!!</p>
+
+<p>This should have been obvious: we want the player to make mistakes. The greater the number of unique characters in the word, the fewer mistakes the player can make, the higher the probability that they will get one right. </p>
       </section>
     </div>
 
