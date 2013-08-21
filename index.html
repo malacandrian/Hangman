@@ -134,12 +134,11 @@
 
 <p>One of the most surprising results is that long words are easier to guess than shorter ones. Despite being longer, they require fewer guesses to discern the word, and incur many fewer mistakes. There are 469 words that require only 1 character to eliminate all other options. Nearly 90% of these are 10 characters or longer.</p>
 
-<p>!!!GRAPH 1 - Word difficulty against length!!!</p>
+<p><img src="https://github.com/malacandrian/Hangman/blob/gh-pages/images/diff-len.png?raw=true" alt="Word difficulty against length"></p>
 
 <p>As the word length increases the number of possible arrangements increases much faster than the number of words increases (see the below graphs). This means that for any given pattern there are fewer words that match it as word length increases.</p>
 
-<p>!!!Graph: Word lengths
-!!!Graph: Word space use</p>
+<p><img src="https://github.com/malacandrian/Hangman/blob/gh-pages/images/len.png?raw=true" alt="Word lengths"><img src="https://github.com/malacandrian/Hangman/blob/gh-pages/images/word-space.png?raw=true" alt="Word space use"></p>
 
 <p>e.g. "Onomatopoeia" is a 12 letter word with 8 unique characters. There are 3102 possible 12 letter words in the dictionary (about 5%), with "i" the most common character among them. Plugging this in gives the pattern <code>"_ _ _ _ _ _ _ _ _ _ i _"</code>, which only 67 words match. We're now down to 2% of 12 letter words, or 0.1% of the dictionary in 1 guess. The next guess is "o" giving us a pattern of <code>"o _ o _ _ _ o _ o _ i _"</code> which is only matched by "onomatopoeia".</p>
 
@@ -150,7 +149,7 @@
 
 <p>Furthermore, having a high proportion of unique characters appears to have no discernible effect on word guess-ability, while high number of them makes the words easier to guess</p>
 
-<p>!!!GRAPH - Word diffuclty against unique chars!!!</p>
+<p><img src="https://github.com/malacandrian/Hangman/blob/gh-pages/images/diff-per-unique.png?raw=true" alt="Word difficulty against % unique characters"><img src="https://github.com/malacandrian/Hangman/blob/gh-pages/images/diff-num-unique.png?raw=true" alt="Word difficulty against # unique characters"></p>
 
 <p>This should have been obvious: we want the player to make mistakes. The greater the number of unique characters in the word, the fewer mistakes the player can make, the higher the probability that they will get one right. A word with 16 or more unique characters is trivially solved.</p>
 
