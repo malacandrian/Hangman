@@ -72,7 +72,7 @@
 </ol><h3>
 <a name="strategy" class="anchor" href="#strategy"><span class="octicon octicon-link"></span></a>Strategy</h3>
 
-<p>Because penalties are only incurred for incorrect guesses, the optimal strategy is not to eliminate as large a portion of potential words as possible, but rather to make as few incorrect guesses as possible. This can be achieved by always selecting the character that appears in the most words that are still possible in a given game state.</p>
+<p>Because penalties are only incurred for incorrect guesses, the optimal strategy is not to eliminate as large a portion of potential words as possible, but rather to make as few incorrect guesses as possible. This can be achieved by always selecting the character that appears in the most words that are still possible in a given game state. </p>
 
 <p>e.g. Given the game state "a _ _ u _ e" Incorrect letters: c, d</p>
 
@@ -100,17 +100,22 @@
 </ul><h2>
 <a name="what-makes-one-word-better-than-another" class="anchor" href="#what-makes-one-word-better-than-another"><span class="octicon octicon-link"></span></a>What makes one word better than another?</h2>
 
-<p>It is prudent to wait</p>
+<p>Instinctively we tend to choose long words when we want to make the game harder. The two key reasons I can see for this are</p>
+
+<ul>
+<li>Reduced word familiarity</li>
+<li>More letters means more guessing</li>
+</ul><p>Because the program is familiar with the entire dictionary it has been given the second is not a factor we can study, though as it is poor sportsmanship to choose a word no one else has heard of this is not a problem. As any given character only needs to be guessed once no matter how frequently it appears a high number of unique characters should be used. The final tactic that should jump out upon examining the player's strategy is to choose rare letters, as they are less likely to guess them.</p>
 
 <h2>
 <a name="collecting-the-data" class="anchor" href="#collecting-the-data"><span class="octicon octicon-link"></span></a>Collecting the data</h2>
 
-<p>A program was written to test <a href="http://www.mieliestronk.com/corncob_lowercase.txt">a list of over 58000 words</a> on both the easy and optimal strategies, outputting its results as a CSV, Excel was then used to analyse the results.</p>
+<p>A program was written to test <a href="http://www.mieliestronk.com/corncob_lowercase.txt">a list of over 58000 words</a> on both the easy and optimal strategies, outputting its results as a CSV, Excel and PowerPivot were then used to analyse the results.</p>
 
 <h3>
 <a name="the-program" class="anchor" href="#the-program"><span class="octicon octicon-link"></span></a>The Program</h3>
 
-<p>At each step the program generates a Regex pattern to represent the current information about the word (in the example above it would have generated <code>^a[^acdeu][^acdeu]u[^acdeu]e\r</code>). It then checks this against all remaining words to find the current set of possible words. If there is ever only one word in this set the problem has been solved. The process is performed twice, once using the easy strategy then again using the optimal one.</p>
+<p>At each step the program generates a Regex pattern to represent the current information about the word (in the example above it would have generated <code>^a[^acdeu][^acdeu]u[^acdeu]e$</code>). It then checks this against all remaining words to find the current set of possible words. If there is ever only one word in this set the problem has been solved. The process is performed twice, once using the easy strategy then again using the optimal one.</p>
 
 <p>The program was written in C# across two main classes: <code>Word.cs</code> allows the words to be queried as to their contents, remembers what has been guessed, and creates the Regex patterns. <code>WordTester.cs</code> maintains the list of possible words and chooses the next character to guess at each step, as well as reporting when the word has been solved.</p>
 
