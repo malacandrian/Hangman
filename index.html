@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Hangman : Solving Hangman" />
+    <meta name="description" content="Hangman : " />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/malacandrian/Hangman">View on GitHub</a>
 
           <h1 id="project_title">Hangman</h1>
-          <h2 id="project_tagline">Solving Hangman</h2>
+          <h2 id="project_tagline"></h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/malacandrian/Hangman/zipball/master">Download this project as a .zip file</a>
@@ -40,7 +40,7 @@
 <li>How do we define a "Good word"?</li>
 <li> What makes one word better than another?</li>
 </ul><h2>
-<a name="the-game" class="anchor" href="#the-game"><span class="octicon octicon-link"></span></a>The Game</h2>
+<a name="the-game" class="anchor" href="#the-game"><span class="octicon octicon-link"></span></a>The game</h2>
 
 <p>Before we begin answering these questions we need to establish what the game is, and how it is best played</p>
 
@@ -127,12 +127,12 @@
 <h3>
 <a name="what-makes-a-word-bad" class="anchor" href="#what-makes-a-word-bad"><span class="octicon octicon-link"></span></a>What makes a word bad?</h3>
 
-<p>Before we start answering this question it's worth looking at factors we thought would help but either have no affect, or actually make the word easier to guess.</p>
+<p>Before we work out what makes a word good it's worth looking at factors we thought would help but either have no affect, or actually make the word easier to guess.</p>
 
 <h4>
 <a name="length" class="anchor" href="#length"><span class="octicon octicon-link"></span></a>Length</h4>
 
-<p>One of the most surprising results is that long words are easier to guess than shorter ones. Despite being longer, they require fewer guesses to discern the word, and incur many fewer mistakes.</p>
+<p>One of the most surprising results is that long words are easier to guess than shorter ones. Despite being longer, they require fewer guesses to discern the word, and incur many fewer mistakes. There are 469 words that require only 1 character to eliminate all other options. Nearly 90% of these are 10 characters or longer.</p>
 
 <p>!!!GRAPH 1 - Word difficulty against length!!!</p>
 
@@ -145,14 +145,34 @@
 
 <p>Playing against the easy strategy, the word contains the 6 most common characters, and after 3 (e, t, a) produces the pattern <code>"_ _ _ _ at _ _ _ e _ a"</code> which again can only be matched by "onomatopoeia".</p>
 
-<h3>
-<a name="unique-characters" class="anchor" href="#unique-characters"><span class="octicon octicon-link"></span></a>Unique Characters</h3>
+<h4>
+<a name="unique-characters" class="anchor" href="#unique-characters"><span class="octicon octicon-link"></span></a>Unique Characters</h4>
 
 <p>Furthermore, having a high proportion of unique characters appears to have no discernible effect on word guess-ability, while high number of them makes the words easier to guess</p>
 
 <p>!!!GRAPH - Word diffuclty against unique chars!!!</p>
 
-<p>This should have been obvious: we want the player to make mistakes. The greater the number of unique characters in the word, the fewer mistakes the player can make, the higher the probability that they will get one right. </p>
+<p>This should have been obvious: we want the player to make mistakes. The greater the number of unique characters in the word, the fewer mistakes the player can make, the higher the probability that they will get one right. A word with 16 or more unique characters is trivially solved.</p>
+
+<p>The 4 longest words with 100% unique characters are "copyrightable", "unpredictability", "unproblematic", and "hydromagnetic". All of these are 13 characters long, and all guessable with no mistakes. </p>
+
+<h3>
+<a name="what-makes-a-word-good" class="anchor" href="#what-makes-a-word-good"><span class="octicon octicon-link"></span></a>What makes a word good?</h3>
+
+<p>What we want is a word with rare characters in common patterns. This means that at each step the player makes a mistake, but as few options as possible are eliminated as a result of the mistake</p>
+
+<h3>
+<a name="what-is-the-best-word" class="anchor" href="#what-is-the-best-word"><span class="octicon octicon-link"></span></a>What is the best word?</h3>
+
+<p>The words that cause the players to make the greatest number of mistakes in the optimal and easy strategies are "bill/dill" (joint) and "zap" respectively. But when the player reaches 10 mistakes they're out, so it doesn't matter how many mistakes beyond 10 it takes, but rather how ambiguous it is after 9 mistakes.</p>
+
+<p>The optimal strategy's biggest gap is a group of 16 words matching the pattern <code>"_ u _ _"</code> <code>incorrect characters: e a o i s r l n m</code> These words are  buck, buff, butt, buzz, cuff, duck,  duct, duff, duty, fuzz, huff, puff, putt, tuck, tuft, and yuck.</p>
+
+<p>The easy strategy has a space of 48 possibilities matching the pattern <code>"_ a _"</code> <code>incorrect characters: e t a o i n s r h</code>. These words are bad, bag, bap, bay, cab, cad, cam, cap, caw, dab, dad, dam, day, fab, fad, fag, fax, gab, gad, gag, gap, gay, jab, jag, jam, jap, jaw, jay, mac, mad, mag, map, maw, may, pad, pap, paw, pay, wad, wag, wax, way, yak, yam, yap, yaw, zag, and zap.</p>
+
+<p>Of course, this does assume that your opponent hasn't also read this and isn't adjusting their strategy accordingly. If they know you're playing off the reduced list, and use the optimal strategy (the list is short enough that it is possible) every word is guessable with only 7 mistakes. </p>
+
+<p>Even if they aren't it's probably very boring to always choose a 3 letter word containing the letter 'a'. So use this power wisely.</p>
       </section>
     </div>
 
